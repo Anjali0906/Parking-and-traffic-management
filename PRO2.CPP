@@ -1,0 +1,264 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<process.h>
+#include<string.h>
+#include<fstream.h>
+#include<conio.h>
+
+class entry
+   {
+
+
+   char userid[100],useid[100],name[50],password[100],address[200],newpass[100];
+   long int phno;
+
+   public:
+    void login();
+    void signup()
+    {
+    ofstream F;
+    F.open("userdata.txt",ios::app);
+
+    cout<<"\t\tEnter name of user  :";
+    cin>>name;
+    cout<<"\t\tEnter adress of user:";
+    cin>>address;
+    cout<<"\t\tEnter phone number  :";
+    cin>>phno;
+    cout<<"\t\tEnter USER ID       :";
+    cin>>userid;
+    strcpy(useid,userid);
+    cout<<"\t\tEnter user password :";
+
+    cin>>password;
+    strcpy(newpass,strcat(userid,password));
+
+    F<<name<<"\n";
+    F<<address<<"\n";
+    F<<phno<<"\n";
+    F<<useid<<"\n";
+    F<<newpass<<"\n";
+   }
+  }E;
+
+//----------------------------LOGIN----------------------------------------
+    void entry::login()
+	 {            //function
+	  int flag = 0;
+	  char id[50],pass[50],npass[100],i[100];
+	  ifstream F("userdata.txt");
+	  cout<<"\n\t\tENTER YOUR ID       :";
+	  cin>>id;
+	  strcpy(i,id);
+	  cout<<"\n\t\tENTER YOUR PASSWORD :";
+	  cin>>pass;
+	  char word[50];
+	  strcpy(npass,strcat(id,pass));
+
+	   while(!F.eof())
+	   {
+	    F>>word;
+	     if(strcmp(npass,word)==0)
+	     {flag=1;
+	     break;
+	     }
+	     }
+	     if(flag==1)
+		 {
+		  clrscr();
+		  cout<<"\n\t\t****************** WELCOME '"<<i<<"' **************\n\n";
+
+		  }
+	     else
+	     cout<<"\t\tINVALID USER ID-PASSWORD COMBINATION!!";
+	     getch();
+
+	    }
+
+
+void staff()
+{
+  int ch;
+  entry e;
+  cout<<"\n\n\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+  cout<<"\n\tr\t@\t\t       STAFF CORNER    \t\t\t@";
+  cout<<"\n\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@";
+  cout<<"\n\n\t\t\t[1]. CREATE ACCOUNT";
+  cout<<"\n\t\t\t[2]. SIGN IN";
+  cout<<"\n\t\tENTER YOUR CHOICE\t: ";
+  cin>>ch;
+  switch(ch)
+  {
+    case 1:e.login();
+	break;
+    case 2:  e.signup();
+	    break;
+  }
+
+}
+
+long int a[4][5];
+void parking(int ch)
+{
+
+ int no,i,flag=0;
+ cout<<"\n\n\t\tENTER YOUR VEHICLE NUMBER\t: ";
+ cin>>no;
+ void display();
+ switch(ch)
+
+ {
+   case 1:for(i=0;i<=4;++i)
+	  { if(a[3][i]==0)
+	   {
+	    a[3][i]=no;
+	    flag=1;
+	    break;
+	   }
+	  }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+
+
+	    }
+	   break;
+   case 2: for(i=0;i<=4;++i)
+	   if(a[2][i]==0)
+	   {
+	    a[2][i]=no;
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   case 3: for(i=0;i<=4;++i)
+	   if(a[1][i]==0)
+	   {
+	    a[1][i]=no;
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   case 4: for(i=0;i<=4;++i)
+	   if(a[0][i]==0)
+	   {
+	    a[0][i]=no;
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   }
+ }
+void display()
+{
+ for( int i=0;i<=3;++i)
+  {
+   cout<<"\n\n\t\t";
+   for(int j=0;j<=4;++j)
+   {
+     cout<<"  | "<<a[i][j]<<" | ";
+   }
+  }
+}
+  void alotp(int ch1)
+  {
+     int ch,no,flag=0;
+     cout<<"\n\n\t\t*******************************************************";
+     cout<<"\n\t\t\t\t\2 \2 MANAGEMENT \2 \2";
+     cout<<"\n\t\t*******************************************************";
+     cout<<"\n\n\t\t\t PRESS 1 FOR PARK THE VEHICLE";
+     cout<<"\n\t\t\t PRESS 2 FOR GET YOUR VEHICLE";
+     cout<<"\n\n\t\t-------------------------------------------------------";
+     cout<<"\n\t\tENTER YOUR CHOICE\t: ";
+     cin>>ch;
+      cout<<"\t\t-------------------------------------------------------";
+
+     switch(ch)
+     {
+     case 1: parking(ch1); break;
+     case 2: cout<<"\n\t\tENTER YOUR VEHICLE NUMBER\t: ";
+	     cin>>no;
+	      for(int i=0;i<=3;++i)
+	      {
+		 for(int j=0;j<=4;++j)
+		{
+		  if(a[i][j]==no)
+		  {
+		    flag=1;
+		    a[i][j]=0;
+		    break;
+		  }
+		 }
+	     }
+	     if(flag==0)
+	     {
+	      cout<<"\n\t\tNO CAR AVAILABLE!";
+	     }
+	     break;
+    }
+ display ();
+}
+
+
+void main()
+{
+  clrscr();
+  char ch='y';
+  for(int i=0;i<=3;++i)
+  {
+   for(int j=0;j<=4;++j)
+   {
+     a[i][j]=0;
+   }
+  }
+   do
+   {
+    int ch1;
+    clrscr();
+    cout<<"\n\n\t   *****************************************************";
+    cout<<"\n\t    MAIN MENU ";
+    cout<<"\n\t   *****************************************************";
+    cout<<"\n\n\t\t\t[1]. PRESS 1 FOR RICKSHAW";
+    cout<<"\n\t\t\t[2]. PRESS 2 FOR BIKE";
+    cout<<"\n\t\t\t[3]. PRESS 3 FOR CAR";
+    cout<<"\n\t\t\t[4]. PRESS 4 FOR BUS";
+    cout<<"\n\t\t\t[5]. STAFF CORNER";
+    cout<<"\n\t\t\t[6]. EXIT";
+    cout<<"\n\n\t   ----------------------------------------------------";
+    cout<<"\n\t\tENTER YOUR CHOICE\t: ";
+    cin>>ch1;
+    cout<<"\n\t   ----------------------------------------------------";
+    getch();
+    clrscr();
+    switch(ch1)
+    {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+	      alotp(ch1);
+	      break;
+      case 5:staff();
+      case 6:exit(0);
+    }
+
+     getch();
+    }
+    while(ch=='Y'||ch=='y');
+
+
+ getch();
+}
+

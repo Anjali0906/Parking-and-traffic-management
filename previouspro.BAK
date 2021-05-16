@@ -1,0 +1,502 @@
+#include<fstream.h>
+#include<stdlib.h>
+#include<graphics.h>
+#include<process.h>
+#include<stdio.h>
+#include<string.h>
+#include<conio.h>
+#include<iostream.h>
+void parkchart()
+{ clrscr();
+  int gd=DETECT,gm;
+  initgraph(&gd,&gm,"c:\\tc\\bgi");
+  setbkcolor(BLUE);
+  cout<<"\n\n\t+------------------+----------------+---------------+---------+";
+  cout<<"\n\t| TYPES OF VEHICLE | FOUR WHEELERS  | TWO  WHEELERS |  CYCLE  |";
+  cout<<"\n\t|  ______________  |  (Car.etc..,)  | (Scooter,Bike)|         |";
+  cout<<"\n\t+------------------+----------------+ --------------+---------+";
+  cout<<"\n\t| UPTO 6 HOURS     |     30         |       15      |    5    |";
+   cout<<"\n\t+------------------+ ---------------+ --------------+---------+";
+  cout<<"\n\t| UPTO 12 HOURS    |     50         |       25      |    5    |";
+  cout<<"\n\t+------------------+ ---------------+ --------------+---------+";
+  cout<<"\n\t| MORE  THAN  12   |     60         |       30      |    10   |";
+  cout<<"\n\t|      HOURS       |                |               |         |";
+  cout<<"\n\t+------------------+ ---------------+ --------------+---------+";
+  cout<<"\n\t| MONTHLY CHARGES  |     1,200      |       600     |    70   |";
+  cout<<"\n\t+------------------+----------------+ --------------+---------+";
+  cout<<"\n\t| NIGHT CHARGES    |                |               |         |";
+  cout<<"\n\t|(Extra)(00.00H to |     60         |       30      |    10   |";
+  cout<<"\n\t|05.00Hrs) -Daily  |                |               |         |";
+  cout<<"\n\t+------------------+----------------+ --------------+---------+";
+  cout<<"\n\t| NIGHT CHARGES    |                |               |         |";
+  cout<<"\n\t|(Extra)(00.00H to |    1,200       |       600     |    70   |";
+  cout<<"\n\t|05.00Hrs) -Monthly|                |               |         |";
+  cout<<"\n\t+------------------+----------------+---------------+---------+";
+  getch();
+  closegraph();
+
+ }
+
+class Entry
+{
+  char userid[20];
+  char user1id[40];
+  char name[20];
+  char password[10];
+  char address[100];
+  char newpass[20];
+  long int phno;
+  public:
+  void login();
+  void sign()
+  {
+
+    clrscr();
+
+	  textcolor(5) ;
+	  cout<<"\n\n\t";
+	  cprintf("* * *   * * * *  * * * *  *      *       * * * *    *       *");
+	  cout<<"\n\t";
+	  cprintf("*          *     *        * *    *          *       * *     * ");
+	  cout<<"\n\t";
+	  cprintf("* * *      *     *   * *  *  *   *          *       *   *   *");
+	  cout<<"\n\t";
+	  cprintf("    *      *     *     *  *    * *          *       *     * *");
+	  cout<<"\n\t";
+	  cprintf("* * *   * * * *  * * * *  *      *       * * * *    *       *" );
+
+   ofstream f("user1data.txt",ios::app);
+   cout<<"\n\n\tUSER NAME\t\t: ";
+   gets(name);
+   cout<<"\n\tADDRESS\t\t\t: ";
+   gets(address);
+   cout<<"\n\tPHONE NUMBER\t\t: ";
+   cin>>phno;
+   cout<<"\n\tUSER ID\t\t\t: ";
+   gets(userid);
+   cout<<"\n\tPASSWORD\t\t: ";
+   gets(password);
+   strcpy(user1id,userid);
+   strcpy(newpass,strcat(userid,password));
+   f<<name<<"\n";
+   f<<address<<"\n";
+   f<<phno<<"\n";
+   f<<user1id<<"\n";
+   f<<newpass<<"\n";
+   f.close();
+  }
+ };
+ void Entry::login()
+	 {
+	   clrscr();
+	  int flag = 0;
+	  void display();
+	  char id[50],pass[50],npass[100],i[100];
+	  ifstream F("user1data.txt");
+	  textcolor(3);
+	  cout<<"\n\n\t\t";
+	  cprintf("*      * * *  * * *     * * *  *    *");
+	  cout<<"\n\t\t";
+	  cprintf("*      *   *  *           *    * *  *");
+	  cout<<"\n\t\t";
+	  cprintf("*      *   *  *   *       *    *  * *");
+	  cout<<"\n\t\t";
+	  cprintf("* * *  * * *  * * *     * * *  *    *");
+	  cout<<"\n\n\n\t\tENTER YOUR ID       :";
+	  gets(id);
+	  strcpy(i,id);
+	  cout<<"\n\t\tENTER YOUR PASSWORD :";
+	  cin>>pass;
+	  char word[50];
+	  strcpy(npass,strcat(id,pass));
+
+	   while(!F.eof())
+	   {
+	    F>>word;
+	     if(strcmp(npass,word)==0)
+	     {flag=1;
+	     display();
+	     break;
+	     }
+	    }
+	    if(flag==1)
+		 { clrscr();
+		   display();
+		  }
+	     else
+	     {
+	       textcolor(2);
+	      cout<<"\n\t\t";
+	      cprintf("!INVALID USER ID-PASSWORD !");
+
+	     }
+	     getch();
+	     F.close();
+
+	    }
+
+int staff()
+{
+    clrscr();
+    int ch;
+    Entry E;
+   int gd=DETECT,gm;
+  initgraph(&gd,&gm,"c:\\tc\\bgi");
+  setbkcolor(MAGENTA);
+
+   cout<<"\n\n\t";
+   cout<<"\n\t\4 \4 \4 \4 \4 \4 \4 \4 \4 \4 \4 STAFF CORNER \4 \4 \4 \4 \4 \4 \4 \4 \4 \4 \4";
+   cout<<"\n\t";
+   cout<<"\n\n\n\n\t\t\t[1]. LOGIN";
+   cout<<"\n\n\t\t\t[2]. SIGN IN";
+   cout<<"\n\n\t\t\t[3]. MAIN MENU";
+   cout<<"\n\n\n\t********************************************************";
+   cout<<"\n\n\t\tEnter your choice\t: ";
+   cin>>ch;
+   cout<<"\n\t********************************************************";
+   getch();
+   closegraph();
+   switch(ch)
+   {
+     case 1:E.login();return 0;
+     case 2:E.sign();
+     case 3:return(0);
+   }
+   getch();
+   return(0);
+}
+void heading()
+{
+  clrscr();
+   int gd=DETECT,gm;
+  initgraph(&gd,&gm,"c:\\tc\\bgi");
+  setbkcolor(BROWN);
+       cout<<"\n\n\t      * * *  * * *   * * *  * * *  * * *  * * *  * * * *" ;
+       cout<<"\n\t        *    *    *  *   *  *      *        *    *      ";
+       cout<<"\n\t        *    * * *   * * *  * * *  * * *    *    *     " ;
+       cout<<"\n\t        *    *   *   *   *  *      *        *    *     ";
+       cout<<"\n\t        *    *    *  *   *  *      *      * * *  * * * *\n\n" ;
+       cout<<"\n\t		 * * * *  *    *  * * *	";
+       cout<<"\n\t		 *     *  * *  *  *    *" ;
+       cout<<"\n\t		 * * * *  *  * *  *     *";
+       cout<<"\n\t		 *     *  *   **  *    *";
+       cout<<"\n\t		 *     *  *    *  * * * \n\n";
+       cout<<"\n\t* * *   * * *  * * *   *   *  * * *  *    *   * * * *	";
+       cout<<"\n\t*    *  *   *  *    *  *  *     *    * *  *   *	";
+       cout<<"\n\t* * *   * * *  * * *   **       *    *  * *   *   * *";
+       cout<<"\n\t*	  *   *  *   *   *  *     *    *   **   *     *";
+       cout<<"\n\t*	  *   *  *    *  *   *  * * *  *    *   * * * *\n\n";
+       cout<<"\n  *     *  * * *  *     *  * * *  * * *   * * *  *     *  * * *  *    *  * * * ";
+       cout<<"\n  * * * *  *   *  * *   *  *   *  *       *      * * * *  *      * *  *    *   ";
+       cout<<"\n  *  *  *  * * *  *  *  *  * * *  *  * *  * * *  *  *  *  * * *  *  * *    *";
+       cout<<"\n  *     *  *   *  *   * *  *   *  *   *   *      *     *  *      *   **    *   ";
+       cout<<"\n  *     *  *   *  *     *  *   *  * * *   * * *  *     *  * * *  *    *    *   ";
+
+  getch();
+  closegraph();
+}
+int no;
+class plot1
+{
+
+ int j;
+ char plot[10];
+ int entryth;
+ int entrytm;
+ int exith;
+ int exitm;
+ char cat[10];
+ public:
+ int amount(int i,int j,char b)
+ {
+   int a=i-j;
+  if(b== 'c')
+  {
+   if(a<6*60)
+    a=30;
+   else if(a<12*60)
+	 a=50;
+	 else  if(a>12*60&&a<24*60*30)
+	      a=60;
+	      else
+	      a=1200;
+
+   }
+   if(b=='b')
+  {
+   if(a<6*60)
+    a=15;
+   else if(a<12*60)
+	 a=25;
+	 else if(a>12*60&&a<24*60*30)
+	      a=30;
+	      else
+	      a=600;
+   }
+   if(b=='a')
+  {
+   if(a<6*60)
+    a=5;
+   else if(a<12*60)
+	 a=5;
+	 else if(a>12*60&&a<24*60*30)
+	      a=10;
+	      else
+	      a=70;
+
+   }
+    return a;
+  }
+ void get(int k,int l)
+ {
+     cout<<"\n\n\n\n\t\tENTER YOUR VEHICLE NUMBER\t: ";
+     cin>>no;
+     cout<<"\n\t\tENTER YOUR ENTRY TIME(H/M)\t: ";
+     cin>>entryth>>entrytm;
+     cout<<"\n\t\tYOUR VEHICLE IS IN\t\t: "<< k<<","<<l;
+
+  }
+  void show(char t)
+  {
+     clrscr();
+     cout<<"\n\t\tYOUR ENTRY TIME IS\t\t: "<<entryth<<":"<<entrytm;
+     cout<<"\n\n\t\tENTER YOUR EXIT TIME(H/M)\t: ";
+     cin>>exith>>exitm;
+     int nmin=entryth*60+entrytm;
+     int xmin=exith*60+exitm;
+      j= amount(nmin,xmin,t);
+
+     cout<<"\n\t\tAMOUNT\t\t\t\t: "<<j;
+    cout<<"\n\t\tHOPE YOU ENJOYED OUR SERVICE";
+    cout<<"\n\t\t\tHAVE A GOOD DAY \2";
+    getch();
+
+  }
+ int getcarno()
+ {
+  return no;
+ }
+};
+
+void create(int i,int j)
+{
+  clrscr();
+  ofstream r("parking0.txt",ios::app) ;
+  plot1 p;
+  p.get(i,j);
+  r.write((char*)&p,sizeof(p));
+  r.close();
+  getch();
+}
+void search(int car_no,char ch)
+{
+  int flag=0;
+  plot1 p;
+  ifstream f("parking0.txt");
+  clrscr();
+  while(!f.eof())
+  {
+   f.read((char*)&p,sizeof(p));
+   if(p.getcarno()==car_no)
+   {
+    p.show(ch);
+    flag++;
+    break;
+   }
+ }
+   if(flag!=1)
+   cout<<"\n\n\t\t\t\tRECORD NOT FOUND";
+   f.close();
+   getch();
+
+}
+
+long int a[4][5];
+void par1(int ch)
+{
+
+ int i,flag=0;
+ void create(int,int);
+ switch(ch)
+
+ {
+   case 1:for(i=0;i<=4;++i)
+	  { if(a[3][i]==0)
+	   {
+	    a[3][i]=no;
+	    create(3,i);
+	    flag=1;
+	    break;
+	   }
+	  }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+
+
+	    }
+	   break;
+   case 2: for(i=0;i<=4;++i)
+	   if(a[2][i]==0)
+	   {
+	    a[2][i]=no;
+	    create(2,i);
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   case 3: for(i=0;i<=4;++i)
+	   if(a[1][i]==0)
+	   {
+	    a[1][i]=no;
+	    create(1,i);
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   case 4: for(i=0;i<=4;++i)
+	   if(a[0][i]==0)
+	   {
+	    a[0][i]=no;
+	    create(0,i);
+	    flag=1;
+	    break;
+	   }
+	   if(flag==0)
+	   {
+	    cout<<"\n\tPARKING IS FULL";
+	   }
+	   break;
+   }
+ }
+void display()
+{
+ for( int i=0;i<=3;++i)
+  {
+   cout<<"\n\n\t\t\tPAKING VEHICLE";
+   cout<<"\n\n\t\t";
+
+   for(int j=0;j<=4;++j)
+   {
+     cout<<"  | "<<a[i][j]<<" | ";
+   }
+  }
+}
+
+  void alotp(int ch1,char ch)
+  {
+     int ch2,cno,flag=0;
+     cout<<"\n\n\t\t*******************************************************";
+     cout<<"\n\t\t\t\t\2 \2 MANAGEMENT \2 \2";
+     cout<<"\n\t\t*******************************************************";
+     cout<<"\n\n\t\t\t PRESS 1 FOR PARK THE VEHICLE";
+     cout<<"\n\t\t\t PRESS 2 TO  GET YOUR VEHICLE";
+     cout<<"\n\n\t\t-------------------------------------------------------";
+     cout<<"\n\t\tENTER YOUR CHOICE\t: ";
+     cin>>ch2;
+      cout<<"\t\t-------------------------------------------------------";
+     switch(ch2)
+     {
+     case 1: par1(ch1); break;
+     case 2: cout<<"\n\t\tENTER YOUR VEHICLE NUMBER\t: ";
+	     cin>>cno;
+	      for(int i=0;i<=3;++i)
+	      {
+		 for(int j=0;j<=4;++j)
+		{
+		  if(a[i][j]==cno)
+		  {
+		    flag=1;
+		    a[i][j]=0;
+		    search(cno,ch);
+		    break;
+		  }
+		 }
+	     }
+	     if(flag==0)
+	     {
+	      cout<<"\n\t\tNO CAR AVAILABLE!";
+	     }
+	     break;
+    }
+}
+
+
+void parking()
+{
+  clrscr();
+  char ch='y';
+  for(int i=0;i<=3;++i)
+  {
+   for(int j=0;j<=4;++j)
+   {
+     a[i][j]=0;
+   }
+  }
+  do
+   {
+    int ch1;
+    clrscr();
+    cout<<"\n\n\t   *****************************************************";
+    cout<<"\n\t    MAIN MENU ";
+    cout<<"\n\t   *****************************************************";
+    cout<<"\n\n\t\t\t[1]. PRESS 1 FOR CYCLE";
+    cout<<"\n\t\t\t[2]. PRESS 2 FOR BIKE";
+    cout<<"\n\t\t\t[3]. PRESS 3 FOR CAR";
+    cout<<"\n\t\t\t[4]. PRESS 4 FOR BUS";
+    cout<<"\n\t\t\t[5]. RATING LIST";
+    cout<<"\n\t\t\t[6]. STAFF CORNER";
+    cout<<"\n\t\t\t[7]. EXIT";
+    cout<<"\n\n\t   ----------------------------------------------------";
+    cout<<"\n\t\tENTER YOUR CHOICE\t: ";
+    cin>>ch1;
+    cout<<"\n\t   ----------------------------------------------------";
+    getch();
+    clrscr();
+    switch(ch1)
+    {
+      case 1:  alotp(ch1,'a');
+	      break;
+      case 2:  alotp(ch1,'b');
+	      break;
+      case 3:  alotp(ch1,'c');
+	      break;
+      case 4:
+	      alotp(ch1,'c');
+	      break;
+      case 5:
+	      parkchart();
+	      break;
+
+      case 6:staff();
+	     break;
+      case 7:exit(0);
+    }
+
+     getch();
+    }
+    while(ch=='y');
+
+
+ getch();
+}
+
+  void main()
+{
+
+  clrscr();
+
+heading();
+ parking();
+
+   getch();
+
+}
